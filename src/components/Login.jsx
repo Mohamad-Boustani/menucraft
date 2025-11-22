@@ -2,14 +2,13 @@ import React from 'react'
 
 function Login() {
 
-const Login = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-gray-300 px-4">
       <div className="bg-white shadow-lg rounded-2xl p-8 w-full max-w-md">
       
         {/* Title */}
         <h2 className="text-2xl font-bold text-center text-gray-800">Welcome Back</h2>
-        <p className="text-center text-gray-500 mb-8">Sign in to your BiteBox account</p>
+        <p className="text-center text-gray-500 mb-8">Sign in to your account</p>
 
         {/* Email */}
         <label className="text-gray-700 font-medium">Email</label>
@@ -27,10 +26,6 @@ const Login = () => {
           className="w-full mt-2 mb-2 p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-400"
         />
 
-        <button className="text-red-500 text-sm mb-6 hover:underline">
-          Forgot your password?
-        </button>
-
         {/* Login Button */}
         <button className="w-full bg-red-500 text-white font-semibold py-3 rounded-xl hover:bg-red-600 transition">
           Login
@@ -47,9 +42,5 @@ const Login = () => {
     </div>
   );
 };
-
-
-  
-}
 
 export default Login
