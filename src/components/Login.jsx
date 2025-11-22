@@ -1,14 +1,16 @@
-import React from 'react'
+import React from "react";
 
 function Login() {
-
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-300 px-4">
       <div className="bg-white shadow-lg rounded-2xl p-8 w-full max-w-md">
-      
         {/* Title */}
-        <h2 className="text-2xl font-bold text-center text-gray-800">Welcome Back</h2>
-        <p className="text-center text-gray-500 mb-8">Sign in to your account</p>
+        <h2 className="text-2xl font-bold text-center text-gray-800">
+          Welcome Back
+        </h2>
+        <p className="text-center text-gray-500 mb-8">
+          Sign in to your account
+        </p>
 
         {/* Email */}
         <label className="text-gray-700 font-medium">Email</label>
@@ -41,6 +43,6 @@ function Login() {
       </div>
     </div>
   );
-};
+}
 
-export default Login
+export default Login;
