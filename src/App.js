@@ -5,6 +5,7 @@ import About from "./pages/About";
 import Login from "./components/Login";
 import Sidebar from "./components/Sidebar";
 import Signup from "./components/Signup";
+import Home from "./pages/Home";
 function App() {
   return (
     <div className="bg-gray-700">
@@ -14,6 +15,8 @@ function App() {
         <Route path="/about" Component={About} />
         <Route path="/login" Component={Login} />
         <Route path="/signup" Component={Signup} />
+        <Route path="/home" Component={Home} />
+        
       </Routes>
     </div>
   );
