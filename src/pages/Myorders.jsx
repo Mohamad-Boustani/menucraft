@@ -14,6 +14,8 @@ export default function Myorders() {
     }
   }, []);
 
+  const total = orders.reduce((s, it) => s + (it.price || 0), 0);
+
   if (!orders || orders.length === 0) {
     return (
       <div className="p-6">
@@ -43,6 +45,11 @@ export default function Myorders() {
           </div>
         </Card>
       ))}
+      <div className="mt-4 flex justify-between font-bold max-w-xl">
+        <span>Total</span>
+        <span>{total.toLocaleString()} LBP</span>
+      </div>
+
       <div className="flex gap-2 mt-4">
         <Button
           variant="contained"

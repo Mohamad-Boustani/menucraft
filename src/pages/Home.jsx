@@ -57,6 +57,7 @@ function Home() {
 
             <Link
               to="/mealcart"
+              state={{ meal }}
               className="bg-red-500 inline-block mt-4 text-white text-center px-4 py-2 rounded"
             >
               Add

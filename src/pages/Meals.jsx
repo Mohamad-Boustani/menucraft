@@ -1,11 +1,12 @@
 import React from "react";
-import { Card, CardMedia, CardContent, Typography } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Card, CardMedia, CardContent, Typography, Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import beef_bur_fries_drink from "../assets/beef_bur_fries_drink.jpeg";
 import chick_bur_with_fries_drink from "../assets/chick_bur_with_fries_drink.jpeg";
 import doub_bur_with_fries_drink from "../assets/doub_bur_with_fries_drink.jpeg";
 import hot_bur_fries_drink from "../assets/hot_bur_fries_drink.jpeg";
 function Meals() {
+  const navigate = useNavigate();
   const smallmeals = [
     {
       name: "Burger Meal",
@@ -40,12 +41,26 @@ function Meals() {
               {meal.price.toLocaleString()} LBP
             </Typography>
 
-            <Link
-              to="/mealcart"
-              className="bg-red-500 inline-block mt-4 text-white text-center px-4 py-2 rounded"
+            <Button
+              variant="contained"
+              color="error"
+              fullWidth
+              className="mt-4"
+              onClick={() => {
+                try {
+                  const raw = localStorage.getItem('orders');
+                  const arr = raw ? JSON.parse(raw) : [];
+                  const exists = arr.some((it) => it.name === meal.name && it.price === meal.price);
+                  if (!exists) arr.push(meal);
+                  localStorage.setItem('orders', JSON.stringify(arr));
+                } catch {
+                  localStorage.setItem('orders', JSON.stringify([meal]));
+                }
+                navigate('/mealcart');
+              }}
             >
               Add
-            </Link>
+            </Button>
           </CardContent>
         </Card>
       ))}
