@@ -7,6 +7,7 @@ import Signup from "./pages/Signup";
 import Home from "./pages/Home";
 import Mealcard from "./pages/Mealcart.jsx";
 import Myorders from "./pages/Myorders";
+import Offers from "./pages/Offers.jsx";
 function App() {
   return (
     <div className="bg-gray-300 text-blck min-h-screen">
@@ -18,6 +19,7 @@ function App() {
         <Route path="/meals" element={<Mealcard />} />
         <Route path="/myorders" element={<Myorders />} />
         <Route path="/about" element={<About />} />
+        <Route path="/offers" element={<Offers />} />
       </Routes>
     </div>
   );

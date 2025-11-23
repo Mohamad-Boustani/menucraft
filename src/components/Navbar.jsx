@@ -2,13 +2,12 @@ import React, { useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import SearchIcon from "@mui/icons-material/Search";
-import Button from "@mui/material/Button";
 import Sidebar from "./Sidebar";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Navbar() {
   const [openDrawer, setOpenDrawer] = useState(false);
-
+  const navigate = useNavigate();
   return (
     <div className="">
       <header className="w-full bg-white border-b border-gray-200 px-4 pt-3 pb-2">
@@ -24,7 +23,7 @@ function Navbar() {
             placeholder="Search items..."
             className="bg-transparent outline-none w-full text-black placeholder-gray-400"
           />
-          <ShoppingCartIcon className="text-2xl text-black cursor-pointer" />
+          <ShoppingCartIcon onClick={() => navigate('/meals')} className="text-2xl text-black cursor-pointer" />
         </div>
         {/* Drawer Component */}
         <Sidebar open={openDrawer} onClose={() => setOpenDrawer(false)} />
