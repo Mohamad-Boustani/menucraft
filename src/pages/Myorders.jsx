@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react";
 import { Card, Typography, Button } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function Myorders() {
-  const navigate = useNavigate();
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
     try {
-      const raw = localStorage.getItem('orders');
+      const raw = localStorage.getItem("orders");
       setOrders(raw ? JSON.parse(raw) : []);
     } catch {
       setOrders([]);
@@ -30,21 +29,35 @@ export default function Myorders() {
       {orders.map((o, idx) => (
         <Card key={idx} className="p-4">
           <div className="flex items-center gap-4">
-            <img src={o.image} alt={o.name} className="w-24 h-24 object-cover rounded" />
+            <img
+              src={o.image}
+              alt={o.name}
+              className="w-24 h-24 object-cover rounded"
+            />
             <div>
               <Typography variant="h6">{o.name}</Typography>
-              <Typography className="text-gray-600">{o.price.toLocaleString()} LBP</Typography>
+              <Typography className="text-gray-600">
+                {o.price.toLocaleString()} LBP
+              </Typography>
             </div>
           </div>
         </Card>
       ))}
       <div className="flex gap-2 mt-4">
-        <Button variant="contained" color="error" onClick={() => {
-          localStorage.removeItem('orders');
-          setOrders([]);
-        }}>Clear Orders</Button>
-        <Button variant="outlined" onClick={() => navigate('/home')}>Back to Home</Button>
+        <Button
+          variant="contained"
+          color="error"
+          onClick={() => {
+            localStorage.removeItem("orders");
+            setOrders([]);
+          }}
+        >
+          Clear Orders
+        </Button>
+        <Link to="/home" className="flex gap-2 mt-4 bg-blue-500 text-white px-4 py-2 rounded">
+          Back to Home
+        </Link>
       </div>
-    </div>
-  );
+    </div>
+  );
 }
