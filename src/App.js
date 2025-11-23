@@ -11,7 +11,7 @@ import Offers from "./pages/Offers.jsx";
 import Meals from "./pages/Meals.jsx";
 function App() {
   return (
-    <div className="bg-gray-300 text-blck min-h-screen">
+    <div className="bg-red-600 text-white min-h-screen">
       <Navbar />
       <Routes>
         <Route path="/home" element={<Home />} />

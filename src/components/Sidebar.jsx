@@ -18,8 +18,8 @@ export default function Sidebar({ open, onClose }) {
     <Drawer anchor="left" open={open} onClose={onClose}>
       <div className="w-72 h-full bg-white px-6 pt-8">
         {/* Close Button */}
-        <div className="flex justify-between mb-6">
-          <h2 className="text-xl font-bold">Menu</h2>
+        <div className="flex justify-between mb-6 ">
+          <h2 className="text-xl font-bold border-b-2">Menu</h2>
           <IconButton onClick={onClose}>
             <CloseIcon className="text-red-500" />
           </IconButton>

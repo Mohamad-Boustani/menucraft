@@ -41,6 +41,7 @@ function Home() {
       name: "Soft Drink",
       price: 100000,
       image: drinks,
+      
     },
   ];
 
@@ -58,7 +59,7 @@ function Home() {
             <Link
               to="/mealcart"
               state={{ meal }}
-              className="bg-red-500 inline-block mt-4 text-white text-center px-4 py-2 rounded"
+              className="bg-red-500 inline-block mt-9 text-white text-center px-4 py-2 rounded w-full"
             >
               Add
             </Link>

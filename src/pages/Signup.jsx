@@ -8,45 +8,45 @@ import {
   FormControl,
 } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Signup() {
   const navigate = useNavigate();
   const [countryCode, setCountryCode] = useState("+961");
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [dob, setDob] = useState('');
-  const [mobile, setMobile] = useState('');
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [dob, setDob] = useState("");
+  const [mobile, setMobile] = useState("");
 
   const handleCreate = (e) => {
     e.preventDefault();
     // basic validation
     if (!firstName || !lastName || !email || !password || !confirmPassword) {
-      toast.error('Please fill all required fields');
+      toast.error("Please fill all required fields");
       return;
     }
     if (password !== confirmPassword) {
-      toast.error('Passwords do not match');
+      toast.error("Passwords do not match");
       return;
     }
 
     // persist simple user record (for demo only)
     try {
-      const usersRaw = localStorage.getItem('users');
+      const usersRaw = localStorage.getItem("users");
       const users = usersRaw ? JSON.parse(usersRaw) : [];
       users.push({ firstName, lastName, email, countryCode, mobile, dob });
-      localStorage.setItem('users', JSON.stringify(users));
+      localStorage.setItem("users", JSON.stringify(users));
     } catch (err) {
       // ignore
     }
 
-    toast.success('Account created successfully');
-    setTimeout(() => navigate('/login'), 800);
-  }
+    toast.success("Account created successfully");
+    setTimeout(() => navigate("/login"), 800);
+  };
 
   return (
     <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
@@ -81,7 +81,8 @@ function Signup() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-
+        <br />
+        <br />
         <TextField
           label="Password"
           variant="outlined"
@@ -93,7 +94,8 @@ function Signup() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-
+        <br />
+        <br />
         <TextField
           label="Confirm Password"
           variant="outlined"
@@ -105,7 +107,8 @@ function Signup() {
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
         />
-
+        <br />
+        <br />
         <TextField
           label="Date of Birth"
           variant="outlined"
@@ -117,7 +120,8 @@ function Signup() {
           value={dob}
           onChange={(e) => setDob(e.target.value)}
         />
-
+        <br />
+        <br />
         <div className="flex space-x-2 mb-6">
           <FormControl variant="outlined" size="small" className="w-1/3">
             <InputLabel id="country-code-label">Code</InputLabel>
@@ -158,7 +162,7 @@ function Signup() {
       </form>
 
       <p className="text-center text-gray-400 text-sm mt-4">
-        Already have an account?{' '}
+        Already have an account?{" "}
         <Link to="/login" className="text-red-600 underline">
           Sign in
         </Link>
