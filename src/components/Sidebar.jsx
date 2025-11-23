@@ -8,7 +8,6 @@ const menuItems = [
   { label: "Home", link: "/home" },
   { label: "Meals", link: "/meals" },
   { label: "Offers", link: "/offers" },
-  { label: "My Orders", link: "/myorders" },
   { label: "About", link: "/about" },
 ];
 

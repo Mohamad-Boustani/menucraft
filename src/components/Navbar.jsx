@@ -23,7 +23,7 @@ function Navbar() {
             placeholder="Search items..."
             className="bg-transparent outline-none w-full text-black placeholder-gray-400"
           />
-          <ShoppingCartIcon onClick={() => navigate('/meals')} className="text-2xl text-black cursor-pointer" />
+          <ShoppingCartIcon onClick={() => navigate('/mealcart')} className="text-2xl text-black cursor-pointer" />
         </div>
         {/* Drawer Component */}
         <Sidebar open={openDrawer} onClose={() => setOpenDrawer(false)} />
