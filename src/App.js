@@ -1,8 +1,10 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import Homepage from "./components/Homepage.jsx";
-import MenuPage from "./components/MenuPage.jsx";
+import Homepage from "./pages/Homepage.jsx";
+import MenuPage from "./pages/MenuPage.jsx";
+import Navbar from "./components/Navbar.jsx";
+import About from "./pages/About.jsx";
 
 
 
@@ -10,10 +12,12 @@ import MenuPage from "./components/MenuPage.jsx";
 
 function App() {
   return (
-    <div className="bg-red-600 text-white min-h-screen">
+    <div>
+      <Navbar />
       <Routes>
-        <Route path="/homepage" element={<Homepage />} />
-        <Route path="/menu" element={<MenuPage />} />
+        <Route path="/home" Component={Homepage} />
+        <Route path="/menu" Component={MenuPage} />
+        <Route path="/about" Component={About} />
       </Routes>
     </div>
   );

@@ -35,7 +35,7 @@ const menuData = {
 
 const Section = ({ title, items }) => (
   <div className="mb-12">
-    <h2 className="text-xl text-black font-bold flex items-center gap-2 mb-6">
+    <h2 className="text-xl text-black  font-bold flex items-center gap-2 mb-6">
       <LocalFireDepartmentIcon className="text-orange-500" /> {title}
     </h2>
     <div className="grid md:grid-cols-2 gap-6">
@@ -65,9 +65,10 @@ const Section = ({ title, items }) => (
     </div>
   </div>
 );
+
 export default function MenuPage() {
   return (
-    <div className="bg-gray-100 py-20 px-4">
+    <div className="bg-[#fffaf5] py-20 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <h1 className="text-4xl text-black font-extrabold tracking-wider">
@@ -78,7 +79,7 @@ export default function MenuPage() {
           </p>
         </div>
 
-        <Section title="BURGERS"  items={menuData.burgers} />
+        <Section title="BURGERS" items={menuData.burgers} />
         <Section title="SIDES" items={menuData.sides} />
         <Section title="DRINKS" items={menuData.drinks} />
         <Section title="COMBOS" items={menuData.combos} />
