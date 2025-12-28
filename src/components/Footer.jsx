@@ -7,10 +7,8 @@ export default function Footer() {
   return (
     <footer className="bg-gradient-to-b from-[#2b1a14] to-[#1a0f0b] text-white pt-16">
       <div className="max-w-7xl mx-auto px-6">
-
         {/* Top Section */}
         <div className="grid md:grid-cols-3 gap-10 pb-12">
-
           {/* Brand */}
           <div>
             <h2 className="text-2xl font-extrabold tracking-wide">
@@ -48,14 +46,12 @@ export default function Footer() {
               </div>
             </div>
           </div>
-
         </div>
 
         {/* Divider */}
         <div className="border-t border-white/10 py-6 text-center text-sm text-gray-400">
           © 2026 Burger House. All rights reserved.
         </div>
-
       </div>
     </footer>
   );

@@ -26,18 +26,14 @@ export function CartProvider({ children }) {
 
   const increaseQty = (name) => {
     setCartItems((prev) =>
-      prev.map((i) =>
-        i.name === name ? { ...i, qty: i.qty + 1 } : i
-      )
+      prev.map((i) => (i.name === name ? { ...i, qty: i.qty + 1 } : i))
     );
   };
 
   const decreaseQty = (name) => {
     setCartItems((prev) =>
       prev
-        .map((i) =>
-          i.name === name ? { ...i, qty: i.qty - 1 } : i
-        )
+        .map((i) => (i.name === name ? { ...i, qty: i.qty - 1 } : i))
         .filter((i) => i.qty > 0)
     );
   };

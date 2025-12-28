@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  Drawer,
-  IconButton,
-  Button,
-} from "@mui/material";
+import { Drawer, IconButton, Button } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
@@ -23,7 +19,6 @@ export default function CartDrawer({ open, onClose }) {
   return (
     <Drawer anchor="right" open={open} onClose={onClose}>
       <div className="w-[360px] p-4 flex flex-col h-full bg-[#fffaf5]">
-
         {/* Header */}
         <div className="flex justify-between items-center mb-4">
           <h2 className="font-bold text-lg">Your Order</h2>
@@ -35,9 +30,7 @@ export default function CartDrawer({ open, onClose }) {
         {/* Items */}
         <div className="flex-1 space-y-3 overflow-y-auto">
           {cartItems.length === 0 && (
-            <p className="text-gray-400 text-center mt-10">
-              Cart is empty
-            </p>
+            <p className="text-gray-400 text-center mt-10">Cart is empty</p>
           )}
 
           {cartItems.map((item) => (
@@ -51,19 +44,13 @@ export default function CartDrawer({ open, onClose }) {
               </div>
 
               <div className="flex items-center gap-2">
-                <IconButton
-                  size="small"
-                  onClick={() => decreaseQty(item.name)}
-                >
+                <IconButton size="small" onClick={() => decreaseQty(item.name)}>
                   <RemoveIcon />
                 </IconButton>
 
                 <span>{item.qty}</span>
 
-                <IconButton
-                  size="small"
-                  onClick={() => increaseQty(item.name)}
-                >
+                <IconButton size="small" onClick={() => increaseQty(item.name)}>
                   <AddIcon />
                 </IconButton>
 

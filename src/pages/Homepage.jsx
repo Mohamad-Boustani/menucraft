@@ -1,6 +1,5 @@
 import React from "react";
-import { Button, Fab } from "@mui/material";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 
 export default function HomePage() {
@@ -31,19 +30,21 @@ export default function HomePage() {
           </p>
 
           <div className="mt-10 flex gap-4 justify-center">
-            <Link className="!bg-gradient-to-r !from-orange-600 !to-orange-400 !px-8 !py-3 !rounded-full" to="/menu">
+            <Link
+              className="!bg-gradient-to-r !from-orange-600 !to-orange-400 !px-8 !py-3 !rounded-full"
+              to="/menu"
+            >
               VIEW MENU
             </Link>
             <Button
               variant="outlined"
-              className="!border-white !text-white !px-8 !py-3 !rounded-full" onClick={() => window.location.href = '/login'}
+              className="!border-white !text-white !px-8 !py-3 !rounded-full"
+              onClick={() => (window.location.href = "/login")}
             >
               ORDER NOW
             </Button>
           </div>
         </div>
-
-       
       </section>
     </div>
   );

@@ -1,62 +1,10 @@
-import React from "react";
-import { Button, Chip } from "@mui/material";
+import axios from "axios";
+import React, { useState, useEffect } from "react";
+import { Button } from "@mui/material";
 import LocalFireDepartmentIcon from "@mui/icons-material/LocalFireDepartment";
 import { useCart } from "../context/Cartcontext";
-
-const menuData = {
-  burgers: [
-    {
-      name: "Classic Cheeseburger",
-      desc: "Juicy beef patty, cheddar cheese, lettuce, tomato, pickles, onion & sauce",
-      price: "$9.99",
-    },
-    {
-      name: "Spicy Jalapeño",
-      desc: "Pepper jack cheese, jalapeños, spicy mayo, crispy onion",
-      price: "$11.99",
-    },
-    {
-      name: "BBQ Ranch Burger",
-      desc: "BBQ sauce, bacon, ranch dressing, crispy onion rings",
-      price: "$12.99",
-    },
-    {
-      name: "Bacon Deluxe",
-      desc: "Smoked bacon, cheddar, caramelized onions, special sauce",
-      price: "$13.99",
-    },
-    {
-      name: "Mushroom Swiss",
-      desc: "Sautéed mushrooms, Swiss cheese, garlic aioli",
-      price: "$12.49",
-    },
-    {
-      name: "Veggie Garden",
-      desc: "Grilled veggie patty, avocado, lettuce, tomato",
-      price: "$10.99",
-    },
-  ],
-  sides: [
-    { name: "Crispy Fries", price: "$3.99" },
-    { name: "Onion Rings", price: "$4.99" },
-    { name: "Chicken Wings", price: "$8.99" },
-    { name: "Loaded Cheese Fries", price: "$6.99" },
-    { name: "Coleslaw", price: "$2.99" },
-    { name: "Mozzarella Sticks", price: "$5.99" },
-  ],
-  drinks: [
-    { name: "Soft Drinks", price: "$2.49" },
-    { name: "Fresh Lemonade", price: "$3.49" },
-    { name: "Milkshakes", price: "$5.99" },
-    { name: "Iced Tea", price: "$2.49" },
-  ],
-  combos: [
-    { name: "Classic Combo", price: "$14.99" },
-    { name: "Family Feast", price: "$29.99" },
-    { name: "Deluxe Combo", price: "$19.99" },
-    { name: "Kids Meal", price: "$7.99" },
-  ],
-};
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const Section = ({ id, title, items, onAdd }) => (
   <div id={id} className="mb-12">
@@ -99,6 +47,77 @@ const Section = ({ id, title, items, onAdd }) => (
 
 export default function MenuPage() {
   const { addToCart } = useCart();
+  const navigate = useNavigate();
+  const [foodItems, setFoodItems] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const getAllFood = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.get("http://localhost:5000/food");
+      if (response.status === 200) {
+        const groupedByCategory = {};
+        response.data.forEach((item) => {
+          const category = item.Category.toLowerCase();
+          if (!groupedByCategory[category]) {
+            groupedByCategory[category] = [];
+          }
+          groupedByCategory[category].push({
+            name: item.FoodName,
+            desc: item.Description,
+            price: `$${item.Price}`,
+          });
+        });
+        setFoodItems(groupedByCategory);
+        setError(null);
+      }
+    } catch (err) {
+      const errorMsg = err.response.data.message || "Failed to load menu";
+      setError(errorMsg);
+      toast.error(errorMsg);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getAllFood();
+  }, []);
+
+  const categoriesInOrder = ["burger", "side", "drink", "combo"];
+  const categoriesToDisplay = categoriesInOrder.filter(
+    (cat) => foodItems[cat]
+  );
+
+  const handleAddToCart = (item) => {
+    const storedUser = localStorage.getItem("user");
+    if (!storedUser) {
+      toast.error("Please login to add items to cart");
+      navigate("/login");
+      return;
+    }
+    addToCart(item);
+  };
+
+  if (loading) {
+    return (
+      <div className="bg-[#fffaf5] py-20 px-4 min-h-screen flex items-center justify-center">
+        <p className="text-gray-500 text-lg">Loading menu...</p>
+      </div>
+    );
+  }
+
+  if (error || categoriesToDisplay.length === 0) {
+    return (
+      <div className="bg-[#fffaf5] py-20 px-4 min-h-screen flex items-center justify-center">
+        <p className="text-red-500 text-lg">
+          {error || "No menu items found"}
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div className="bg-[#fffaf5] py-20 px-4">
       <div className="max-w-6xl mx-auto">
@@ -111,10 +130,15 @@ export default function MenuPage() {
           </p>
         </div>
 
-        <Section id="burgers" title="BURGERS" items={menuData.burgers} onAdd={addToCart} />
-        <Section id="sides" title="SIDES" items={menuData.sides} onAdd={addToCart} />
-        <Section id="drinks" title="DRINKS" items={menuData.drinks} onAdd={addToCart} />
-        <Section id="combos" title="COMBOS" items={menuData.combos} onAdd={addToCart} />
+        {categoriesToDisplay.map((category) => (
+          <Section
+            key={category}
+            id={category}
+            title={category.toUpperCase()}
+            items={foodItems[category]}
+            onAdd={handleAddToCart}
+          />
+        ))}
       </div>
     </div>
   );

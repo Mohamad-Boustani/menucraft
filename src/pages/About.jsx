@@ -1,11 +1,10 @@
 import React from "react";
-import { AppBar, Toolbar, Button, Card, CardContent, Fab } from "@mui/material";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import LocalFireDepartmentIcon from "@mui/icons-material/LocalFireDepartment";
+import { Card, CardContent, } from "@mui/material";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
+
 export default function About() {
   return (
     <section className="bg-[#fffaf5] py-20 px-4">

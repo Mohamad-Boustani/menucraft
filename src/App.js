@@ -7,6 +7,7 @@ import Navbar from "./components/Navbar.jsx";
 import About from "./pages/About.jsx";
 import Register from "./pages/Register.jsx";
 import Login from "./pages/Login.jsx";
+import Contact from "./pages/Contact.jsx";
 import { CartProvider } from "./context/Cartcontext";
 import Footer from "./components/Footer";
 
@@ -22,6 +23,7 @@ function App() {
         <Route path="/about" Component={About} />
         <Route path="/register" Component={Register} />
         <Route path="/login" Component={Login} />
+        <Route path="/contact" Component={Contact} />
       </Routes>
       <Footer />
     </CartProvider>
