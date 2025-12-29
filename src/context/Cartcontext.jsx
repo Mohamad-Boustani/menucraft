@@ -8,16 +8,29 @@ export function CartProvider({ children }) {
     return saved ? JSON.parse(saved) : [];
   });
 
+  const [orderId, setOrderId] = useState(() => {
+    const saved = localStorage.getItem("orderId");
+    return saved ? saved : null;
+  });
+
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cartItems));
   }, [cartItems]);
+
+  useEffect(() => {
+    if (orderId) {
+      localStorage.setItem("orderId", orderId);
+    } else {
+      localStorage.removeItem("orderId");
+    }
+  }, [orderId]);
 
   const addToCart = (item) => {
     setCartItems((prev) => {
       const exist = prev.find((i) => i.name === item.name);
       if (exist) {
         return prev.map((i) =>
-          i.name === item.name ? { ...i, qty: i.qty + 1 } : i
+          i.name === item.name ? { ...i, ...item, qty: i.qty + 1 } : i
         );
       }
       return [...prev, { ...item, qty: 1 }];
@@ -59,6 +72,8 @@ export function CartProvider({ children }) {
         removeFromCart,
         clearCart,
         totalPrice,
+        orderId,
+        setOrderId,
       }}
     >
       {children}

@@ -12,9 +12,9 @@ const Section = ({ id, title, items, onAdd }) => (
       <LocalFireDepartmentIcon className="text-orange-500" /> {title}
     </h2>
     <div className="grid md:grid-cols-2 gap-6">
-      {items.map((item, index) => (
+      {items.map((item) => (
         <div
-          key={index}
+          key={item.id}
           className="flex justify-between items-start bg-white p-4 rounded-xl shadow-sm border"
         >
           <div>
@@ -24,15 +24,16 @@ const Section = ({ id, title, items, onAdd }) => (
             )}
           </div>
           <div className="flex flex-col items-end gap-2">
-            <span className="font-bold text-orange-600">{item.price}</span>
+            <span className="font-bold text-orange-600">{item.priceLabel}</span>
             <Button
               variant="contained"
               size="small"
               className="!bg-orange-500 !rounded-full !text-xs"
               onClick={() =>
                 onAdd({
+                  foodId: item.id,
                   name: item.name,
-                  price: Number(item.price.replace("$", "")),
+                  price: item.price,
                 })
               }
             >
@@ -46,11 +47,27 @@ const Section = ({ id, title, items, onAdd }) => (
 );
 
 export default function MenuPage() {
-  const { addToCart } = useCart();
+  const { addToCart, orderId, setOrderId } = useCart();
   const navigate = useNavigate();
   const [foodItems, setFoodItems] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const ensureOrderId = async (userId) => {
+    if (orderId) return orderId;
+
+    const today = new Date().toISOString().split("T")[0];
+
+    const response = await axios.post("http://localhost:5000/orders", {
+      OrderDate: today,
+      TotalPrice: 0,
+      UserID: userId,
+    });
+
+    const newOrderId = String(response.data.id);
+    setOrderId(newOrderId);
+    return newOrderId;
+  };
 
   const getAllFood = async () => {
     try {
@@ -64,9 +81,11 @@ export default function MenuPage() {
             groupedByCategory[category] = [];
           }
           groupedByCategory[category].push({
+            id: item.FoodID,
             name: item.FoodName,
             desc: item.Description,
-            price: `$${item.Price}`,
+            price: Number(item.Price),
+            priceLabel: `$${item.Price}`,
           });
         });
         setFoodItems(groupedByCategory);
@@ -90,14 +109,33 @@ export default function MenuPage() {
     (cat) => foodItems[cat]
   );
 
-  const handleAddToCart = (item) => {
+  const handleAddToCart = async (item) => {
     const storedUser = localStorage.getItem("user");
     if (!storedUser) {
       toast.error("Please login to add items to cart");
       navigate("/login");
       return;
     }
-    addToCart(item);
+
+    const user = JSON.parse(storedUser);
+
+    try {
+      const activeOrderId = await ensureOrderId(user.UserID);
+
+      addToCart(item);
+
+      await axios.post("http://localhost:5000/orderitems/upsert", {
+        OrderID: activeOrderId,
+        FoodID: item.foodId,
+        Quantity: 1,
+        Price: item.price,
+      });
+
+      toast.success(`${item.name} added to cart`);
+    } catch (err) {
+      const message = err.response?.data?.message || "Failed to add item";
+      toast.error(message);
+    }
   };
 
   if (loading) {
