@@ -27,7 +27,7 @@ export default function Register() {
 
   const handleRegister = async () => {
     try {
-      const response = await axios.post("http://localhost:5000/users", {
+      const response = await axios.post("https://menucraftbackend-production.up.railway.app/users", {
         Fname: form.firstName,
         Lname: form.lastName,
         Phone: form.phone,

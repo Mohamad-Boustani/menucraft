@@ -58,7 +58,7 @@ export default function MenuPage() {
 
     const today = new Date().toISOString().split("T")[0];
 
-    const response = await axios.post("http://localhost:5000/orders", {
+    const response = await axios.post("https://menucraftbackend-production.up.railway.app/orders", {
       OrderDate: today,
       TotalPrice: 0,
       UserID: userId,
@@ -72,7 +72,7 @@ export default function MenuPage() {
   const getAllFood = async () => {
     try {
       setLoading(true);
-      const response = await axios.get("http://localhost:5000/food");
+      const response = await axios.get("https://menucraftbackend-production.up.railway.app/food");
       if (response.status === 200) {
         const groupedByCategory = {};
         response.data.forEach((item) => {
@@ -124,7 +124,7 @@ export default function MenuPage() {
 
       addToCart(item);
 
-      await axios.post("http://localhost:5000/orderitems/upsert", {
+      await axios.post("https://menucraftbackend-production.up.railway.app/orderitems/upsert", {
         OrderID: activeOrderId,
         FoodID: item.foodId,
         Quantity: 1,

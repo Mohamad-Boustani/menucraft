@@ -41,7 +41,7 @@ export default function CartDrawer({ open, onClose }) {
       console.log("Deleting item:", { orderId, foodId: item.foodId, item });
       
       // Delete from database
-      const response = await axios.delete("http://localhost:5000/orderitems/by-order-food", {
+      const response = await axios.delete("https://menucraftbackend-production.up.railway.app/orderitems/by-order-food", {
         data: { 
           OrderID: parseInt(orderId), 
           FoodID: parseInt(item.foodId) 
@@ -74,12 +74,12 @@ export default function CartDrawer({ open, onClose }) {
     try {
       setWorking(true);
       if (nextQty <= 0) {
-        await axios.delete("http://localhost:5000/orderitems/by-order-food", {
+        await axios.delete("https://menucraftbackend-production.up.railway.app/orderitems/by-order-food", {
           data: { OrderID: parseInt(orderId), FoodID: item.foodId },
         });
         removeFromCart(item.name);
       } else {
-        await axios.put("http://localhost:5000/orderitems/by-order-food", {
+        await axios.put("https://menucraftbackend-production.up.railway.app/orderitems/by-order-food", {
           OrderID: parseInt(orderId),
           FoodID: item.foodId,
           Quantity: nextQty,
@@ -103,7 +103,7 @@ export default function CartDrawer({ open, onClose }) {
 
     try {
       setWorking(true);
-      await axios.post("http://localhost:5000/orderitems/upsert", {
+      await axios.post("https://menucraftbackend-production.up.railway.app/orderitems/upsert", {
         OrderID: parseInt(orderId),
         FoodID: item.foodId,
         Quantity: 1,
@@ -128,9 +128,9 @@ export default function CartDrawer({ open, onClose }) {
     try {
       setWorking(true);
       // Delete all order items first
-      await axios.delete(`http://localhost:5000/orderitems/by-order/${orderId}`);
+      await axios.delete(`https://menucraftbackend-production.up.railway.app/orderitems/by-order/${orderId}`);
       // Then delete the order itself
-      await axios.delete(`http://localhost:5000/orders/${orderId}`);
+      await axios.delete(`https://menucraftbackend-production.up.railway.app/orders/${orderId}`);
       clearCart();
       setOrderId(null);
       toast.success("Cart cleared");
@@ -156,7 +156,7 @@ export default function CartDrawer({ open, onClose }) {
     try {
       setPlacing(true);
 
-      await axios.post(`http://localhost:5000/orders/${orderId}/finalize`);
+      await axios.post(`https://menucraftbackend-production.up.railway.app/orders/${orderId}/finalize`);
 
       toast.success("Order placed successfully");
       clearCart();

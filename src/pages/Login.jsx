@@ -16,7 +16,7 @@ export default function Login() {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post("http://localhost:5000/login", {
+      const response = await axios.post("https://menucraftbackend-production.up.railway.app/login", {
         Phone: phone,
         Password: password,
       });
