@@ -57,6 +57,35 @@ D.Usage info:
   5. **Place Order**: Click "Place Order" button in the cart to finalize your order
   6. **Clear Cart**: Use the "Clear Cart" button to remove all items and start fresh
   7. **Navigation**: Use the Navbar to navigate between pages (Home, Menu, About, Contact, etc.)
+
+## Screenshots
+
+### 1. Homepage
+![Homepage](web_img/Homepage.png)
+
+### 2. Login Page
+![Login](web_img/Login.png)
+
+### 3. Register Page
+![Register](web_img/register.png)
+
+### 4. Menu Page
+![Menu](web_img/Menu.png)
+
+### 5. Sidebar Navigation
+![Sidebar](web_img/SideBar.png)
+
+### 6. Shopping Cart
+![Cart](web_img/cart.png)
+
+### 7. Cart with Items
+![Cart 2](web_img/cart2.png)
+
+### 8. Contact Page
+![Contact](web_img/Contact.png)
+
+### 9. About & Footer
+![About Footer](web_img/About_Footer.png)
     
 E.Project structure
 
